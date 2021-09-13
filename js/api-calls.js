@@ -4,7 +4,7 @@ $(document).ready(function () {
     $('.display-results').hide();
 
 
-    //step 1 get the input from the user
+    //step 1 get the input from the user for is-this-number-prime
     $(".is-this-number-prime").submit(function (event) {
 
         //force JavaScript to handle the submission
