@@ -1,1 +1,1 @@
-# jquery-example
+# Prime-numbers-API - jquery-example
