@@ -8,7 +8,7 @@ $(document).ready(function () {
     $(".is-this-number-prime").submit(function (event) {
 
         //force JavaScript to handle the submission
-        // event.preventDefault();
+        event.preventDefault();
 
         //get the value from the input box
         let is_this_number_prime_apiKey = $("#is-this-number-prime-apiKey").val();
