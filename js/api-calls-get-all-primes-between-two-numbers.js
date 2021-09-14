@@ -29,7 +29,7 @@ $(document).ready(function () {
     function get_all_primes_between_two_numbers_api_call(get_all_primes_between_two_numbers_apiKey, get_all_primes_between_two_numbers_check_start, get_all_primes_between_two_numbers_check_end, get_all_primes_between_two_numbers_include_explanations, get_all_primes_between_two_numbers_include_prime_types_list, get_all_primes_between_two_numbers_language) {
         let get_all_primes_between_two_numbers_api_url = `http://api.prime-numbers.io/get-all-primes-between-two-numbers.php?key=${get_all_primes_between_two_numbers_apiKey}&start=${get_all_primes_between_two_numbers_check_start}&end=${get_all_primes_between_two_numbers_check_end}&include_explanations=${get_all_primes_between_two_numbers_include_explanations}&include_prime_types_list=${get_all_primes_between_two_numbers_include_prime_types_list}&language=${get_all_primes_between_two_numbers_language}`
 
-        // console.log(get_all_primes_between_two_numbers_api_url)
+        console.log(get_all_primes_between_two_numbers_api_url)
 
         $.ajax({
             url: get_all_primes_between_two_numbers_api_url,
@@ -53,7 +53,7 @@ $(document).ready(function () {
 
 function get_all_primes_between_two_numbers_api_results(dataReceived) {
 
-    // console.log(dataReceived);
+    console.log(dataReceived);
 
     //create an empty variable to store a new list item for each result
     let buildHtmlResults = "";

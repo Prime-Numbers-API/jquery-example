@@ -8,7 +8,7 @@ $(document).ready(function () {
     $(".is-this-number-prime").submit(function (event) {
 
         //force JavaScript to handle the submission
-        event.preventDefault();
+        // event.preventDefault();
 
         //get the value from the input box
         let is_this_number_prime_apiKey = $("#is-this-number-prime-apiKey").val();
@@ -35,7 +35,7 @@ $(document).ready(function () {
             type: 'get',
             cache: false,
             success: function (dataReceived) {
-                console.log('success!');
+                // console.log('success!');
                 is_this_number_prime_api_results(dataReceived);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -86,7 +86,7 @@ function is_this_number_prime_api_results(dataReceived) {
 
 function is_this_number_prime_api_results_details(dataReceived, parentKey) {
 
-    console.log(dataReceived);
+    // console.log(dataReceived);
 
     //create an empty variable to store a new list item for each result
     let buildHtmlResults = '<table class="table">';
@@ -103,14 +103,14 @@ function is_this_number_prime_api_results_details(dataReceived, parentKey) {
     }
     buildHtmlResults += '</table>';
 
-    console.log(buildHtmlResults);
+    // console.log(buildHtmlResults);
 
     return buildHtmlResults;
 };
 
 function displayError(errorText, containerClass) {
 
-    console.log(errorText);
+    // console.log(errorText);
 
     let buildHtmlError = `<button type="button" class="close" data-dismiss="alert" aria-label="Close">`;
     buildHtmlError += `<span aria-hidden="true">×</span>`;

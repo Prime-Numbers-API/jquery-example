@@ -35,7 +35,7 @@ $(document).ready(function () {
             type: 'get',
             cache: false,
             success: function (dataReceived) {
-                console.log('success!');
+                // console.log('success!');
                 get_isolated_random_prime_api_results(dataReceived);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -86,7 +86,7 @@ function get_isolated_random_prime_api_results(dataReceived) {
 
 function get_isolated_random_prime_api_results_details(dataReceived, parentKey) {
 
-    console.log(dataReceived);
+    // console.log(dataReceived);
 
     //create an empty variable to store a new list item for each result
     let buildHtmlResults = '<table class="table">';
@@ -103,14 +103,14 @@ function get_isolated_random_prime_api_results_details(dataReceived, parentKey) 
     }
     buildHtmlResults += '</table>';
 
-    console.log(buildHtmlResults);
+    // console.log(buildHtmlResults);
 
     return buildHtmlResults;
 };
 
 function displayError(errorText, containerClass) {
 
-    console.log(errorText);
+    // console.log(errorText);
 
     let buildHtmlError = `<button type="button" class="close" data-dismiss="alert" aria-label="Close">`;
     buildHtmlError += `<span aria-hidden="true">×</span>`;
