@@ -36,7 +36,7 @@ $(document).ready(function () {
             cache: false,
             success: function (dataReceived) {
                 console.log('success!');
-                console.log(dataReceived);
+                is_this_number_prime_api_results(dataReceived);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 console.log("Status: ", textStatus); 
@@ -56,33 +56,56 @@ function is_this_number_prime_api_results(dataReceived) {
 
     //create an empty variable to store a new list item for each result
     let buildHtmlResults = "";
-
-    $.each(dataReceived, function (dataReceivedKey, dataReceivedValue) {
-        buildHtmlResults += "<li>";
-        buildHtmlResults += "<div class='event-display-details'>";
-        buildHtmlResults += "<div class='event-display-name' >" + dataReceivedValue.displayName + "</div>"
-        buildHtmlResults += "<div class='event-details-start-date' >" + dataReceivedValue.start.date + "</div>";
-
-        buildHtmlResults += "<div class='event-details-city' >" + dataReceivedValue.location.city + "</div><br>";
-
-        buildHtmlResults += "<a href='" + dataReceivedValue.uri + "' class='event-details-button' target='_blank'>More Info</a>";
-        buildHtmlResults += "</div>";
-        buildHtmlResults += "</div>";
-        buildHtmlResults += "<div class='event-details-venue' >";
-
-        if (dataReceivedValue.venue.displayName != null || dataReceivedValue.location.city != null) {
-            buildHtmlResults += "<iframe width='100%' height='150px'frameborder='0' style='border:0; clear: both; margin:10px;' src='https://www.google.com/maps/embed/v1/place?key=AIzaSyBdNRsY4zEYnRfcQ0_ZVVd370D7yuApzhI&q=" + dataReceivedValue.venue.displayName + "," + dataReceivedValue.location.city + "&maptype=roadmap' allowfullscreen></iframe>";
+    let counter = 1;
+    for (let key in dataReceived) {
+        // console.log(typeof dataReceived[key]);
+        if (typeof dataReceived[key] == "object") {
+            buildHtmlResults += `<tr class="results-is-this-number-prime-${key}">`;
+            buildHtmlResults += `<th scope="row">${counter}</th>`;
+            buildHtmlResults += `<td>${key}</td>`;
+            buildHtmlResults += `<td class="${key}">${is_this_number_prime_api_results_details(dataReceived[key], key)}</td>`;
+            buildHtmlResults += `</tr>`;
         }
-        buildHtmlResults += "</div>";
-        buildHtmlResults += "<div class='event-display-required-image' >";
-        buildHtmlResults += "<img class='song-kick' src='images/poweredBySongKick.png'/>";
-        buildHtmlResults += "</div>";
-
-        buildHtmlResults += "</li>";
-    });
+        else {
+            dataOutput = dataReceived[key];
+            buildHtmlResults += `<tr class="results-is-this-number-prime-${key}">`;
+            buildHtmlResults += `<th scope="row">${counter}</th>`;
+            buildHtmlResults += `<td>${key}</td>`;
+            buildHtmlResults += `<td class="${key}">${dataReceived[key]}</td>`;
+            buildHtmlResults += `</tr>`;
+        }
+        
+        
+        counter++;
+    }
 
     //use the html output to show it in the index.html
-    $('#search-results ul').html(buildHtmlResults);
+    $('.results-is-this-number-prime-show').html(buildHtmlResults);
+    $('.results-is-this-number-prime').show();
+};
+
+function is_this_number_prime_api_results_details(dataReceived, parentKey) {
+
+    console.log(dataReceived);
+
+    //create an empty variable to store a new list item for each result
+    let buildHtmlResults = '<table class="table">';
+    let counter = 1;
+    for (let key in dataReceived) {
+        
+        buildHtmlResults += `<tr>`;
+        buildHtmlResults += `<th scope="row">${counter}</th>`;
+        buildHtmlResults += `<td>${key}</td>`;
+        buildHtmlResults += `<td>${dataReceived[key]}</td>`;
+        buildHtmlResults += `</tr>`;
+
+        counter++;
+    }
+    buildHtmlResults += '</table>';
+
+    console.log(buildHtmlResults);
+
+    return buildHtmlResults;
 };
 
 function displayError(errorText, containerClass) {
