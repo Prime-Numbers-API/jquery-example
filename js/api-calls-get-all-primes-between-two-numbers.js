@@ -35,9 +35,9 @@ $(document).ready(function () {
             url: get_all_primes_between_two_numbers_api_url,
             type: 'get',
             cache: false,
-            success: function (dataReceived) {
+            success: function (incomingData) {
                 // console.log('success!');
-                get_all_primes_between_two_numbers_api_results(dataReceived);
+                get_all_primes_between_two_numbers_api_results(incomingData);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 console.log("Status: ", textStatus); 
@@ -51,29 +51,29 @@ $(document).ready(function () {
 
 //step3 using the JSON response, populate the relevant part of your HTML with the variable inside the JSON
 
-function get_all_primes_between_two_numbers_api_results(dataReceived) {
+function get_all_primes_between_two_numbers_api_results(incomingData) {
 
-    console.log(dataReceived);
+    console.log(incomingData);
 
     //create an empty variable to store a new list item for each result
     let buildHtmlResults = "";
     let counter = 1;
-    for (let i = 0; i < dataReceived.length; i++) {
-        for (let key in dataReceived[i]) {
-            // console.log(typeof dataReceived[key]);
-            if (typeof dataReceived[i][key] == "object") {
+    for (let i = 0; i < incomingData.length; i++) {
+        for (let key in incomingData[i]) {
+            // console.log(typeof incomingData[key]);
+            if (typeof incomingData[i][key] == "object") {
                 buildHtmlResults += `<tr class="results-get-all-primes-between-two-numbers-${key}">`;
                 buildHtmlResults += `<th scope="row">${counter}</th>`;
                 buildHtmlResults += `<td>${key}</td>`;
-                buildHtmlResults += `<td class="${key}">${get_all_primes_between_two_numbers_api_results_details(dataReceived[i][key], key)}</td>`;
+                buildHtmlResults += `<td class="${key}">${get_all_primes_between_two_numbers_api_results_details(incomingData[i][key], key)}</td>`;
                 buildHtmlResults += `</tr>`;
             }
             else {
-                dataOutput = dataReceived[i][key];
+                dataOutput = incomingData[i][key];
                 buildHtmlResults += `<tr class="results-get-all-primes-between-two-numbers-${key}">`;
                 buildHtmlResults += `<th scope="row">${counter}</th>`;
                 buildHtmlResults += `<td>${key}</td>`;
-                buildHtmlResults += `<td class="${key}">${dataReceived[i][key]}</td>`;
+                buildHtmlResults += `<td class="${key}">${incomingData[i][key]}</td>`;
                 buildHtmlResults += `</tr>`;
             }
             counter++;
@@ -85,19 +85,19 @@ function get_all_primes_between_two_numbers_api_results(dataReceived) {
     $('.results-get-all-primes-between-two-numbers').show();
 };
 
-function get_all_primes_between_two_numbers_api_results_details(dataReceived, parentKey) {
+function get_all_primes_between_two_numbers_api_results_details(incomingData, parentKey) {
 
-    // console.log(dataReceived);
+    // console.log(incomingData);
 
     //create an empty variable to store a new list item for each result
     let buildHtmlResults = '<table class="table">';
     let counter = 1;
-    for (let key in dataReceived) {
+    for (let key in incomingData) {
         
         buildHtmlResults += `<tr>`;
         buildHtmlResults += `<th scope="row">${counter}</th>`;
         buildHtmlResults += `<td>${key}</td>`;
-        buildHtmlResults += `<td>${dataReceived[key]}</td>`;
+        buildHtmlResults += `<td>${incomingData[key]}</td>`;
         buildHtmlResults += `</tr>`;
 
         counter++;

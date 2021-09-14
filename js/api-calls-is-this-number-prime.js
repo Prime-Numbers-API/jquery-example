@@ -34,9 +34,9 @@ $(document).ready(function () {
             url: is_this_number_prime_api_url,
             type: 'get',
             cache: false,
-            success: function (dataReceived) {
+            success: function (incomingData) {
                 // console.log('success!');
-                is_this_number_prime_api_results(dataReceived);
+                is_this_number_prime_api_results(incomingData);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 console.log("Status: ", textStatus); 
@@ -50,28 +50,28 @@ $(document).ready(function () {
 
 //step3 using the JSON response, populate the relevant part of your HTML with the variable inside the JSON
 
-function is_this_number_prime_api_results(dataReceived) {
+function is_this_number_prime_api_results(incomingData) {
 
-    console.log(dataReceived);
+    console.log(incomingData);
 
     //create an empty variable to store a new list item for each result
     let buildHtmlResults = "";
     let counter = 1;
-    for (let key in dataReceived) {
-        // console.log(typeof dataReceived[key]);
-        if (typeof dataReceived[key] == "object") {
+    for (let key in incomingData) {
+        // console.log(typeof incomingData[key]);
+        if (typeof incomingData[key] == "object") {
             buildHtmlResults += `<tr class="results-is-this-number-prime-${key}">`;
             buildHtmlResults += `<th scope="row">${counter}</th>`;
             buildHtmlResults += `<td>${key}</td>`;
-            buildHtmlResults += `<td class="${key}">${is_this_number_prime_api_results_details(dataReceived[key], key)}</td>`;
+            buildHtmlResults += `<td class="${key}">${is_this_number_prime_api_results_details(incomingData[key], key)}</td>`;
             buildHtmlResults += `</tr>`;
         }
         else {
-            dataOutput = dataReceived[key];
+            dataOutput = incomingData[key];
             buildHtmlResults += `<tr class="results-is-this-number-prime-${key}">`;
             buildHtmlResults += `<th scope="row">${counter}</th>`;
             buildHtmlResults += `<td>${key}</td>`;
-            buildHtmlResults += `<td class="${key}">${dataReceived[key]}</td>`;
+            buildHtmlResults += `<td class="${key}">${incomingData[key]}</td>`;
             buildHtmlResults += `</tr>`;
         }
         
@@ -84,19 +84,19 @@ function is_this_number_prime_api_results(dataReceived) {
     $('.results-is-this-number-prime').show();
 };
 
-function is_this_number_prime_api_results_details(dataReceived, parentKey) {
+function is_this_number_prime_api_results_details(incomingData, parentKey) {
 
-    // console.log(dataReceived);
+    // console.log(incomingData);
 
     //create an empty variable to store a new list item for each result
     let buildHtmlResults = '<table class="table">';
     let counter = 1;
-    for (let key in dataReceived) {
+    for (let key in incomingData) {
         
         buildHtmlResults += `<tr>`;
         buildHtmlResults += `<th scope="row">${counter}</th>`;
         buildHtmlResults += `<td>${key}</td>`;
-        buildHtmlResults += `<td>${dataReceived[key]}</td>`;
+        buildHtmlResults += `<td>${incomingData[key]}</td>`;
         buildHtmlResults += `</tr>`;
 
         counter++;
